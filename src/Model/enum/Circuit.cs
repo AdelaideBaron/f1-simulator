@@ -9,16 +9,16 @@ public class CircuitNameAttribute(string value) : Attribute
 public enum Circuit
 {
     [CircuitName("Autodromo Nazionale di Monza")]
-    MONZA,
+    Monza,
 
     [CircuitName("Bahrain International Circuit")]
-    BAHRAIN,
+    Bahrain,
     
     [CircuitName("Silverstone Circuit")]
-    SILVERSTONE,
+    Silverstone,
 
     [CircuitName("Circuit de Monaco")]
-    MONACO
+    Monaco
 }
 
 public static class CircuitExtensions
