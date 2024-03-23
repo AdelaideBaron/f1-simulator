@@ -1,3 +1,22 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Controller;
 
-Console.WriteLine("Hello, World!");
+namespace View;
+
+static class UserView
+    {
+        static void Main(string[] args)
+        {
+            UserMessages.Welcome();
+            UserMessages.RunSimulatorQuestion();
+            bool runSimulation = UserInteractions.DoesUserWantAction();
+            while (runSimulation)
+            {
+                UserMessages.Simulate();
+                Simulator.RunSimulator();
+                runSimulation = UserInteractions.DoesUserWantAction();
+            }
+
+            UserMessages.Exit();
+
+        }
+    }
