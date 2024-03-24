@@ -1,4 +1,3 @@
-using Model.Database.InitDatabase;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 
@@ -6,20 +5,24 @@ namespace Model.Database;
 
 public class DatabaseClient
 {
+    // Todo this code needs optimising, as repeating the create table everytime is time consuming - e.g. opening and closing the connection. 
     readonly string connectionString = "server=localhost;user=root;password=password;database=f1_simulator";
 
     public void InitialiseDatabase()
     {
-        string[] scripts = CreateTables.getCreateTableStatements();
-        foreach (string statement in scripts)
+        foreach (string statement in InitDatabase.CreateTable.getCreateTableStatements())
         {
-            CreateTable(statement);
+            RunSqlStatement(statement);
+        }
+
+        foreach (string statement in InitDatabase.InsertIntoTable.GetInsertIntoStatements())
+        {
+            RunSqlStatement(statement);
         }
     }
 
-    private void CreateTable(string statement)
+    private void RunSqlStatement(string statement)
     {
-        string tableName = ExtractTableName(statement);
         using (MySqlConnection connection = new MySqlConnection(connectionString))
         {
             try
@@ -28,7 +31,7 @@ public class DatabaseClient
                 using (MySqlCommand command = new MySqlCommand(statement, connection))
                 {
                     command.ExecuteNonQuery();
-                    Console.WriteLine($"Table {tableName} created successfully");
+                    GetLogMessage(statement);
                 }
             }
             catch (MySqlException ex)
@@ -38,9 +41,35 @@ public class DatabaseClient
         }
     }
 
-    private string ExtractTableName(string input)
+    private void GetLogMessage(string input)
     {
-        string pattern = @"CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+(\w+)";
+        string[] words = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+        if (words.Length > 0)
+        {
+            string firstWord = words[0].ToUpper();
+
+            if (firstWord == "CREATE")
+            {
+                string pattern = @"CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+(\w+)";
+                string tableName = ExtractTableName(input, pattern);
+                Console.WriteLine($"CREATE {tableName} created SUCCESSFUL");
+            }
+            else if (firstWord == "INSERT")
+            {
+                string pattern = @"INSERT\s+INTO\s+(\w+)";
+                string tableName = ExtractTableName(input, pattern);
+                Console.WriteLine($"INSERT INTO {tableName} SUCCESSFUL");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Input string is empty.");
+        }
+    }
+
+    private string ExtractTableName(string input, string pattern)
+    {
         Match match = Regex.Match(input, pattern, RegexOptions.IgnoreCase);
 
         if (match.Success)
