@@ -1,7 +1,8 @@
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
+using Model.database.scripts;
 
-namespace Model.Database;
+namespace Model.database;
 
 public class DatabaseClient
 {
@@ -10,12 +11,12 @@ public class DatabaseClient
 
     public void InitialiseDatabase()
     {
-        foreach (string statement in InitDatabase.CreateTable.getCreateTableStatements())
+        foreach (string statement in CreateTable.GetCreateTableStatements())
         {
             RunSqlStatement(statement);
         }
 
-        foreach (string statement in InitDatabase.InsertIntoTable.GetInsertIntoStatements())
+        foreach (string statement in InsertIntoTable.GetInsertIntoStatements())
         {
             RunSqlStatement(statement);
         }

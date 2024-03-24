@@ -1,7 +1,7 @@
 using System.Text;
 using Model.@enum;
 
-namespace Model.Database.InitDatabase;
+namespace Model.database.scripts;
 
 public class InsertIntoTable
 {

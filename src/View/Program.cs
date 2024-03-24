@@ -1,6 +1,6 @@
 ﻿using Controller;
 using Microsoft.Extensions.Configuration;
-using Model.Database;
+using Model.database;
 
 namespace View;
 

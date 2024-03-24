@@ -1,7 +1,7 @@
 using System.Text;
 using Model.@enum;
 
-namespace Model.Database.InitDatabase;
+namespace Model.database.scripts;
 
 public class CreateTable
 {
@@ -113,7 +113,7 @@ public class CreateTable
                                                               );
                                                               """;
 
-    public static string[] getCreateTableStatements()
+    public static string[] GetCreateTableStatements()
     {
         string[] statements =
         {
