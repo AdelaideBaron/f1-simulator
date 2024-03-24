@@ -9,10 +9,7 @@ class UserView
         static void Main(string[] args)
         {
             DatabaseClient databaseClient = new DatabaseClient();
-            databaseClient.PerformQuery();
-            
-            // print API key - to be used when setting up the circuit 
-            Console.WriteLine(GetApiKey() );
+            databaseClient.InitialiseDatabase();
             
             UserMessages.Welcome();
             UserMessages.RunSimulatorQuestion();
