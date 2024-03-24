@@ -1,5 +1,6 @@
 ﻿using Controller;
 using Microsoft.Extensions.Configuration;
+using Model.database;
 
 namespace View;
 
@@ -7,6 +8,9 @@ class UserView
     {
         static void Main(string[] args)
         {
+            DatabaseClient databaseClient = new DatabaseClient();
+            databaseClient.InitialiseDatabase();
+            
             UserMessages.Welcome();
             UserMessages.RunSimulatorQuestion();
             bool runSimulation = UserInteractions.DoesUserWantAction();
@@ -21,7 +25,7 @@ class UserView
 
         }
 
-        private static string? GetApiKey()
+        private static string? GetApiKey() 
         {
             var config = new ConfigurationBuilder()
                 .AddUserSecrets<UserView>()

@@ -1,6 +1,6 @@
 using Model.@enum;
 
-namespace ModelTests;
+namespace ModelTests.entity;
 
 public class CircuitTests
 {
