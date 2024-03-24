@@ -1,5 +1,6 @@
 ﻿using Controller;
 using Microsoft.Extensions.Configuration;
+using Model.Database;
 
 namespace View;
 
@@ -7,6 +8,12 @@ class UserView
     {
         static void Main(string[] args)
         {
+            DatabaseClient databaseClient = new DatabaseClient();
+            databaseClient.PerformQuery();
+            
+            // print API key - to be used when setting up the circuit 
+            Console.WriteLine(GetApiKey() );
+            
             UserMessages.Welcome();
             UserMessages.RunSimulatorQuestion();
             bool runSimulation = UserInteractions.DoesUserWantAction();
@@ -21,7 +28,7 @@ class UserView
 
         }
 
-        private static string? GetApiKey()
+        private static string? GetApiKey() 
         {
             var config = new ConfigurationBuilder()
                 .AddUserSecrets<UserView>()
