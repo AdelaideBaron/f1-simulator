@@ -9,20 +9,8 @@ class UserView
     {
         static void Main(string[] args)
         {
-            OpenWeatherHttpClient client = new OpenWeatherHttpClient();
-            try
-            {
-                string todo = client.GetTodoAsync(1).Result;
-                Console.WriteLine(todo);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"An error occurred: {ex.Message}");
-            }
-            finally
-            {
-                client.Dispose();
-            }
+            WeatherClient client = new WeatherClient();
+            client.GetWeatherFromApi();
             // DatabaseClient databaseClient = new DatabaseClient();
             // databaseClient.InitialiseDatabase();
             //

@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Configuration;
+
 namespace Controller.http;
 
 public class OpenWeatherHttpClient
@@ -7,12 +9,14 @@ public class OpenWeatherHttpClient
     public OpenWeatherHttpClient()
     {
         _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/");
+        _httpClient.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/weather");
     }
+    
+    
 
-    public async Task<string> GetTodoAsync(int id)
+    public async Task<string> GetTodoAsync(int id) // TODO rename
     {
-        string endpoint = $"todos/{id}";
+        string endpoint = GetEndpoint();
         HttpResponseMessage response = await _httpClient.GetAsync(endpoint);
 
         if (response.IsSuccessStatusCode)
@@ -28,5 +32,22 @@ public class OpenWeatherHttpClient
     public void Dispose()
     {
         _httpClient.Dispose();
+    }
+
+    private string GetEndpoint() // todo pass in the values
+    {
+        double lat = 43.73;
+        double lon = 7.42;
+        string apiKey = GetApiKey();
+        return $"?lat={lat}&lon={lon}&appid={apiKey}";
+    }
+    
+    private static string? GetApiKey() 
+    {
+        var config = new ConfigurationBuilder()
+            .AddUserSecrets<OpenWeatherHttpClient>()
+            .Build();
+            
+        return config["OpenWeatherApiKey"];
     }
 }
