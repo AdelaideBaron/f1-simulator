@@ -1,4 +1,5 @@
 ﻿using Controller;
+using Controller.http;
 using Microsoft.Extensions.Configuration;
 using Model.database;
 
@@ -8,20 +9,34 @@ class UserView
     {
         static void Main(string[] args)
         {
-            DatabaseClient databaseClient = new DatabaseClient();
-            databaseClient.InitialiseDatabase();
-            
-            UserMessages.Welcome();
-            UserMessages.RunSimulatorQuestion();
-            bool runSimulation = UserInteractions.DoesUserWantAction();
-            while (runSimulation)
+            OpenWeatherHttpClient client = new OpenWeatherHttpClient();
+            try
             {
-                UserMessages.Simulate();
-                Simulator.RunSimulator();
-                runSimulation = UserInteractions.DoesUserWantAction();
+                string todo = client.GetTodoAsync(1).Result;
+                Console.WriteLine(todo);
             }
-            
-            UserMessages.Exit();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            finally
+            {
+                client.Dispose();
+            }
+            // DatabaseClient databaseClient = new DatabaseClient();
+            // databaseClient.InitialiseDatabase();
+            //
+            // UserMessages.Welcome();
+            // UserMessages.RunSimulatorQuestion();
+            // bool runSimulation = UserInteractions.DoesUserWantAction();
+            // while (runSimulation)
+            // {
+            //     UserMessages.Simulate();
+            //     Simulator.RunSimulator();
+            //     runSimulation = UserInteractions.DoesUserWantAction();
+            // }
+            //
+            // UserMessages.Exit();
 
         }
 
