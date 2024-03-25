@@ -2,6 +2,7 @@
 using Controller.http;
 using Microsoft.Extensions.Configuration;
 using Model.database;
+using Model.@enum;
 
 namespace View;
 
@@ -10,7 +11,7 @@ class UserView
         static void Main(string[] args)
         {
             WeatherClient client = new WeatherClient();
-            client.GetWeatherFromApi();
+            client.GetCircuitWeather(Circuit.Bahrain);
             // DatabaseClient databaseClient = new DatabaseClient();
             // databaseClient.InitialiseDatabase();
             //

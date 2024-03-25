@@ -12,11 +12,9 @@ public class OpenWeatherHttpClient
         _httpClient.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/weather");
     }
     
-    
-
-    public async Task<string> GetTodoAsync(int id) // TODO rename
+    public async Task<string> GetTodoAsync( double lat, double lon) // TODO rename
     {
-        string endpoint = GetEndpoint();
+        string endpoint = GetEndpoint(lat, lon);
         HttpResponseMessage response = await _httpClient.GetAsync(endpoint);
 
         if (response.IsSuccessStatusCode)
@@ -33,11 +31,9 @@ public class OpenWeatherHttpClient
     {
         _httpClient.Dispose();
     }
-
-    private string GetEndpoint() // todo pass in the values
+    
+    private string GetEndpoint(double lat, double lon) 
     {
-        double lat = 43.73;
-        double lon = 7.42;
         string apiKey = GetApiKey();
         return $"?lat={lat}&lon={lon}&appid={apiKey}";
     }
