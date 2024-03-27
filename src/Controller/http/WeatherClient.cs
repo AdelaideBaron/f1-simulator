@@ -23,7 +23,7 @@ public class WeatherClient
       };
       return circuitConditions;
    }
-   public WeatherData GetCircuitWeather(Circuit circuit)
+   private WeatherData GetCircuitWeather(Circuit circuit)
    {
       OpenWeatherHttpClient client = new OpenWeatherHttpClient();
       try
