@@ -9,5 +9,5 @@ _Currently a manual setup process, with views to automate the setup in the futur
 
 ### Secrets/keys 
 - Configure your api key wthin secrets.json 
-- this must be within View -> tools, https://blog.jetbrains.com/dotnet/2023/01/17/securing-sensitive-information-with-net-user-secrets/ 
+- this must be within the Controller -> https://blog.jetbrains.com/dotnet/2023/01/17/securing-sensitive-information-with-net-user-secrets/ 
 - 
