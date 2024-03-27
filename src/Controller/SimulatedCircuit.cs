@@ -1,10 +1,13 @@
+using Controller.http;
+using Model.dto;
 using Model.@enum;
 
 namespace System;
 
 public class SimulatedCircuit
 {
-    public Circuit circuit;
+    private Circuit circuit;
+    public CircuitConditions CurrentConditions { get; set; }
 
     public SimulatedCircuit(Circuit circuitToSimulate)
     {
@@ -14,6 +17,7 @@ public class SimulatedCircuit
     
     private void InitialiseCircuit()
     {
-        
+        WeatherClient client = new WeatherClient();
+        CurrentConditions = client.GetCircuitConditions(circuit);
     }
 }

@@ -1,3 +1,4 @@
+using Model.dto;
 using Model.@enum;
 using Model.pojo;
 using Newtonsoft.Json;
@@ -7,30 +8,42 @@ namespace Controller.http;
 public class WeatherClient
 {
 
-   public void GetCircuitConditions(Circuit circuit)
+   public CircuitConditions GetCircuitConditions(Circuit circuit)
    {
-      // make an object for the circuit conditions 
-      // use the below method for it 
+      WeatherData weatherData = GetCircuitWeather(circuit);
+      
+      double rain = (weatherData.rain == null) ? 0 : weatherData.rain._1h;
+      double temp = (weatherData.main.temp == null) ? circuit.GetDefaultTemperature() : weatherData.main.temp;
+    
+      CircuitConditions circuitConditions = new CircuitConditions
+      {
+         Circuit = circuit,
+         Rain = rain,
+         Temp = temp
+      };
+      return circuitConditions;
    }
-   public void GetCircuitWeather(Circuit circuit)
+   public WeatherData GetCircuitWeather(Circuit circuit)
    {
       OpenWeatherHttpClient client = new OpenWeatherHttpClient();
       try
       {
-         CircuitCoordinatesAttribute circuitCoordinates = CircuitExtensions.GetCircuitCoordinates(circuit);
+         CircuitCoordinatesAttribute circuitCoordinates = circuit.GetCircuitCoordinates();
          string apiResponse = client.GetTodoAsync(circuitCoordinates.Latitude, circuitCoordinates.Longitude).Result;
-         WeatherData? weatherData = JsonConvert.DeserializeObject<WeatherData>(apiResponse);
-         Console.WriteLine(weatherData.name);
+         WeatherData weatherData = JsonConvert.DeserializeObject<WeatherData>(apiResponse) ?? throw new InvalidOperationException();
+         return weatherData;
       }
       catch (Exception ex)
       {
          Console.WriteLine($"An error occurred: {ex.Message}");
+         throw new InvalidOperationException("Failed to fetch weather data for the circuit.", ex);
       }
       finally
       {
          client.Dispose();
       }
    }
+
    
    
 }
