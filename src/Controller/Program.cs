@@ -1,3 +1,16 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Controller;
+using Microsoft.Extensions.Configuration;
+using Model.database;
 
-Console.WriteLine("Hello, World!");
+namespace View;
+
+class UserView
+    {
+        static void Main(string[] args)
+        {
+          Console.WriteLine("hello world");
+
+        }
+        
+        
+    }
