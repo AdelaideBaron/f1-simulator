@@ -8,6 +8,6 @@ public class SimulatedCircuitTests
     public void SimulatedCircuitInitialisesCircuit()
     {
         SimulatedCircuit simulatedCircuit = new SimulatedCircuit(Circuit.Monaco);
-        Assert.NotNull(simulatedCircuit.CurrentConditions.Rain);
+        Assert.NotNull(simulatedCircuit.CurrentConditions.IsRaining);
     }
 }

@@ -12,13 +12,13 @@ public class WeatherClient
    {
       WeatherData weatherData = GetCircuitWeather(circuit);
       
-      double rain = (weatherData.rain == null) ? 0 : weatherData.rain._1h;
+      bool rain = (weatherData.rain != null);
       double temp = (weatherData.main.temp == null) ? circuit.GetDefaultTemperature() : weatherData.main.temp;
     
       CircuitConditions circuitConditions = new CircuitConditions
       {
          Circuit = circuit,
-         Rain = rain,
+         IsRaining = rain,
          Temp = temp
       };
       return circuitConditions;

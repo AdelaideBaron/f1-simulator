@@ -11,7 +11,7 @@ public class WeatherClientTests
     {
         WeatherClient weatherClient = new WeatherClient();
         CircuitConditions circuitConditions = weatherClient.GetCircuitConditions(Circuit.Bahrain);
-        Assert.NotNull(circuitConditions.Rain);
+        Assert.NotNull(circuitConditions.IsRaining);
         Assert.NotNull(circuitConditions.Temp);
         Assert.That(circuitConditions.Circuit, Is.EqualTo(Circuit.Bahrain));
     }

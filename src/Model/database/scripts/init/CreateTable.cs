@@ -103,7 +103,7 @@ public class CreateTable
                                                       """;
 
     private const string CreateSimulatedRacePositionResults = """
-                                                              CREATE TABLE IF NOT EXISTS position_results -- table to store the drivers and their race progression
+                                                              CREATE TABLE IF NOT EXISTS simulated_race_position_results -- table to store the drivers and their race progression
                                                               (
                                                                   simulated_race_id INT,
                                                                   driver_number INT UNIQUE, -- driver entry to be updated, only one entry per driver
@@ -113,13 +113,23 @@ public class CreateTable
                                                               );
                                                               """;
 
+    private const string CreateSimulatedRaceConditions = """
+                                                         CREATE TABLE IF NOT EXISTS simulated_race_conditions
+                                                         (
+                                                         simulated_race_id INT NOT NULL,
+                                                         circuit_id INT NOT NULL, 
+                                                         temp DEC NOT NULL, 
+                                                         raining BOOL NOT NULL
+                                                         );
+                                                         """;
+
     public static string[] GetCreateTableStatements()
     {
         string[] statements =
         {
             CreateTeam, CreateDriver, CreateDriverRating, CreateCircuitTable(), CreateCircuitStats, CreateTyre,
             CreateSimulatedRaceLive, CreateSimulatedRaceAudit, CreateSimulatedRaceResults,
-            CreateSimulatedRacePositionResults
+            CreateSimulatedRacePositionResults, CreateSimulatedRaceConditions
         };
         return statements;
     }
@@ -146,4 +156,6 @@ public class CreateTable
             PRIMARY KEY (circuit_id)
         );";
     }
+    
+    
 }
