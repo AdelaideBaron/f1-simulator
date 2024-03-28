@@ -20,7 +20,7 @@ public class InsertDuringRaceTests
                           INSERT INTO simulated_race_conditions
                           (simulated_race_id, circuit_id, temp, raining)
                           VALUES
-                          ((SELECT DISTINCT simulated_race_id FROM simulated_race_live ),
+                          ((SELECT DISTINCT simulated_race_id FROM simulated_race_results),
                           (SELECT circuit_id FROM circuit WHERE circuit_name = "Bahrain International Circuit"),
                           19,
                           0);  -- simulated_race_live table is setup prior, and is cleared after each race

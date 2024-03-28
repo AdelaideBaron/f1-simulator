@@ -119,7 +119,8 @@ public class CreateTable
                                                          simulated_race_id INT NOT NULL,
                                                          circuit_id INT NOT NULL, 
                                                          temp DEC NOT NULL, 
-                                                         raining BOOL NOT NULL
+                                                         raining BOOL NOT NULL,
+                                                         FOREIGN KEY(simulated_race_id) REFERENCES simulated_race_results(simulated_race_id)
                                                          );
                                                          """;
 
