@@ -25,4 +25,14 @@ public class Simulation // for each simulation
         // add this to the DB 
         SimulatedCircuit simulatedCircuit = new SimulatedCircuit(Circuit);
     }
+
+    public void teardownDb()
+    {
+        clearDb();
+    }
+
+    private void clearDb()
+    {
+        //clear the tables that can be cleared
+    }
 }
