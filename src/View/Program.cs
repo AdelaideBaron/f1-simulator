@@ -8,8 +8,7 @@ class UserView
     {
         static void Main(string[] args)
         {
-            DatabaseClient databaseClient = new DatabaseClient();
-            databaseClient.InitialiseDatabase();
+            DatabaseInteractions.initialiseDatabase();
             
             UserMessages.Welcome();
             UserMessages.RunSimulatorQuestion();
