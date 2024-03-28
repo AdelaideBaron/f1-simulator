@@ -20,7 +20,9 @@ public class Simulation // for each simulation
     
     private void SetupCircuitAndDrivers()
     {
-        SimulatedCircuit simulatedCircuit = new SimulatedCircuit(Circuit);
+        // setup the tables - simulated race results - first 
         // setup drivers - todo in next branch
+        // add this to the DB 
+        SimulatedCircuit simulatedCircuit = new SimulatedCircuit(Circuit);
     }
 }

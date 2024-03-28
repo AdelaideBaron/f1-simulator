@@ -116,12 +116,10 @@ public class CreateTable
     private const string CreateSimulatedRaceConditions = """
                                                          CREATE TABLE IF NOT EXISTS simulated_race_conditions
                                                          (
-                                                         simulated_race_id INT,
-                                                         circuit_id INT, 
-                                                         temp DEC, 
-                                                         raining BOOL,
-                                                         FOREIGN KEY(simulated_race_id) REFERENCES simulated_race_results(simulated_race_id)
-                                                         
+                                                         simulated_race_id INT NOT NULL,
+                                                         circuit_id INT NOT NULL, 
+                                                         temp DEC NOT NULL, 
+                                                         raining BOOL NOT NULL
                                                          );
                                                          """;
 
