@@ -5,9 +5,8 @@ namespace Model.database.scripts;
 
 public class InsertDuringRace
 {
-    public static string GetRaceConditionsStatement(CircuitConditions circuitConditions) // can unit test this 
+    public static string GetRaceConditionsStatement(CircuitConditions circuitConditions) 
     {
-        // get the circuit ID here 
         string circuitName = CircuitExtensions.GetCircuitName(circuitConditions.Circuit);
         string temp = circuitConditions.Temp.ToString();
         string rain = (circuitConditions.IsRaining) ? "1" : "0"; 
