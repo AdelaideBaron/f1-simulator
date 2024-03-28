@@ -1,8 +1,8 @@
-using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 using Model.database.scripts;
+using MySql.Data.MySqlClient;
 
-namespace Model.database;
+namespace Controller.database;
 
 public class DatabaseClient
 {
@@ -20,6 +20,13 @@ public class DatabaseClient
         {
             RunSqlStatement(statement);
         }
+        
+        foreach (string statement in CreateTrigger.GetTriggers())
+        {
+            RunSqlStatement(statement);
+        }
+        
+        // also add the trigger. 
     }
 
     private void RunSqlStatement(string statement)
@@ -32,7 +39,7 @@ public class DatabaseClient
                 using (MySqlCommand command = new MySqlCommand(statement, connection))
                 {
                     command.ExecuteNonQuery();
-                    GetLogMessage(statement);
+                    GetLogMessage(statement); // update get log message 
                 }
             }
             catch (MySqlException ex)
@@ -50,7 +57,7 @@ public class DatabaseClient
         {
             string firstWord = words[0].ToUpper();
 
-            if (firstWord == "CREATE")
+            if (firstWord == "CREATE") // need to update as won't work for trigger, but will still fall into here 
             {
                 string pattern = @"CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+(\w+)";
                 string tableName = ExtractTableName(input, pattern);

@@ -1,3 +1,5 @@
+using Controller.database;
+
 namespace Model.database;
 
 public class DatabaseInteractions // rename this 
@@ -9,8 +11,9 @@ public class DatabaseInteractions // rename this
         databaseClient.InitialiseDatabase();
     }
 
-    public static void setupSimulation()
+    public static void setupSimulation(string raceId)
     {
-        
+        // setup the drivers in simulated race live 
+        // 
     }
 }
