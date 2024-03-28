@@ -7,10 +7,12 @@ public class Simulation // for each simulation
 {
     public Circuit Circuit;
     private SimulatedCircuit simulatedCircuit;
+    private string simulatedRaceId; 
     
     public Simulation(Circuit circuit)
     {
         Circuit = circuit;
+        simulatedRaceId = generateUuid();
     }
 
     public void runSimulation()
@@ -34,5 +36,11 @@ public class Simulation // for each simulation
     private void clearDb()
     {
         //clear the tables that can be cleared
+    }
+
+    private string generateUuid()
+    {
+        Guid uuid = Guid.NewGuid();
+        return uuid.ToString();
     }
 }
