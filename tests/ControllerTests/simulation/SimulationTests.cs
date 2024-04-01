@@ -1,5 +1,4 @@
 using Controller.simulation;
-using Model.dto;
 using Model.@enum;
 
 namespace ControllerTests;
@@ -12,12 +11,7 @@ public class SimulationTests
     [SetUp]
     public void SetUp()
     {
-    //     testCircuitConditions = new CircuitConditions()
-    //     {
     testCircuit = Circuit.Bahrain;
-    //         IsRaining = false,
-    //         Temp = 19.00
-    //     };
     }
     
     [Test]
