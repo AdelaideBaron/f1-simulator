@@ -1,16 +1,18 @@
-using Model.dto;
+using Model.database.scripts;
 using Model.@enum;
 
-namespace System;
+namespace Controller.simulation;
 
 public class Simulation // for each simulation 
 {
     public Circuit Circuit;
-    private SimulatedCircuit simulatedCircuit;
+    public Guid RaceId { get; }
+    private SimulatedCircuit _simulatedCircuit;
     
     public Simulation(Circuit circuit)
     {
         Circuit = circuit;
+        RaceId = Guid.NewGuid();
     }
 
     public void runSimulation()
