@@ -58,7 +58,7 @@ public class CreateTable
     private const string CreateSimulatedRaceLive = """
                                                    CREATE TABLE IF NOT EXISTS simulated_race_live -- table to store the drivers and their race progression
                                                    (
-                                                       simulated_race_id INT,
+                                                       simulated_race_id VARCHAR(36),
                                                        driver_number INT UNIQUE, -- driver entry to be updated, only one entry per driver
                                                        position TINYINT UNSIGNED NOT NULL CHECK (position >= 0 AND position <= 20),
                                                        status ENUM("is_driving", "race_ban", "dnf", "no_start"),
@@ -76,7 +76,7 @@ public class CreateTable
     private const string CreateSimulatedRaceAudit = """
                                                     CREATE TABLE IF NOT EXISTS simulated_race_audit -- table to store the drivers and their race progression
                                                     (
-                                                        simulated_race_id INT,
+                                                        simulated_race_id VARCHAR(36),
                                                         driver_number INT UNIQUE, -- driver entry to be updated, only one entry per driver
                                                         position TINYINT UNSIGNED NOT NULL CHECK (position >= 0 AND position <= 20),
                                                         status ENUM("is_driving", "race_ban", "dnf", "no_start"),
@@ -92,7 +92,7 @@ public class CreateTable
     private const string CreateSimulatedRaceResults = """
                                                       CREATE TABLE IF NOT EXISTS simulated_race_results-- table to store the drivers and their race progression
                                                       (
-                                                          simulated_race_id INT,
+                                                          simulated_race_id VARCHAR(36),
                                                           winning_driver_number INT UNIQUE, -- driver entry to be updated, only one entry per driver
                                                           position_results_id INT,
                                                           fastest_lap DECIMAL(6, 5), -- m:SSmSms - e.g 1:19.915 = 1.19915,
@@ -105,7 +105,7 @@ public class CreateTable
     private const string CreateSimulatedRacePositionResults = """
                                                               CREATE TABLE IF NOT EXISTS simulated_race_position_results -- table to store the drivers and their race progression
                                                               (
-                                                                  simulated_race_id INT,
+                                                                  simulated_race_id VARCHAR(36),
                                                                   driver_number INT UNIQUE, -- driver entry to be updated, only one entry per driver
                                                                   position INT UNIQUE,
                                                                   FOREIGN KEY(driver_number) REFERENCES driver(driver_number),
@@ -116,7 +116,7 @@ public class CreateTable
     private const string CreateSimulatedRaceConditions = """
                                                          CREATE TABLE IF NOT EXISTS simulated_race_conditions
                                                          (
-                                                         simulated_race_id INT NOT NULL,
+                                                         simulated_race_id VARCHAR(36) NOT NULL,
                                                          circuit_id INT NOT NULL, 
                                                          temp DEC NOT NULL, 
                                                          raining BOOL NOT NULL

@@ -6,15 +6,23 @@ namespace ModelTests.database;
 
 public class InsertDuringRaceTests
 {
-    [Test]
-    public void RaceConditionsStatementIsFormattedToQueryDb()
+    private CircuitConditions testCircuitConditions;
+
+    [SetUp]
+    public void SetUp()
     {
-        CircuitConditions testCircuitConditions = new CircuitConditions()
+        testCircuitConditions = new CircuitConditions()
         {
             Circuit = Circuit.Bahrain,
             IsRaining = false,
             Temp = 19.00
         };
+    }
+    
+    [Test]
+    public void RaceConditionsStatementIsFormattedToQueryDb()
+    {
+        
         string actual = InsertDuringRace.GetRaceConditionsStatement(testCircuitConditions);
         string expected = """
                           INSERT INTO simulated_race_conditions

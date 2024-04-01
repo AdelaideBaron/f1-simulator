@@ -1,5 +1,4 @@
 ﻿using Controller;
-using Microsoft.Extensions.Configuration;
 using Model.database;
 
 namespace View;
@@ -23,16 +22,6 @@ class UserView
             
             UserMessages.Exit();
 
-        }
-
-        private static string? GetApiKey() 
-        {
-            var config = new ConfigurationBuilder()
-                .AddUserSecrets<UserView>()
-                .Build();
-            
-            Console.WriteLine($"Hello, {config["OpenWeatherApiKey"]}");
-            return config["OpenWeatherApiKey"];
         }
         
     }

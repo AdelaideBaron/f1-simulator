@@ -11,7 +11,7 @@ public class OpenWeatherHttpClient
         _httpClient = new HttpClient();
         _httpClient.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/weather");
     }
-    
+   // todo review and rename the below  
     public async Task<string> GetTodoAsync( double lat, double lon) // TODO rename
     {
         string endpoint = GetEndpoint(lat, lon);
@@ -22,7 +22,7 @@ public class OpenWeatherHttpClient
             return await response.Content.ReadAsStringAsync();
         }
         else
-        {
+        { // todo review the below
             throw new HttpRequestException($"Failed to fetch todo item. Status code: {response.StatusCode}");
         }
     }
