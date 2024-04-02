@@ -1,6 +1,6 @@
 using Model.@enum;
 
-namespace ControllerTests;
+namespace ControllerTests.simulation;
 
 public class SimulatedCircuitTests
 {

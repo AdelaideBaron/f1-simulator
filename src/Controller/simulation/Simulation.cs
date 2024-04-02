@@ -37,7 +37,7 @@ public class Simulation // for each simulation
         // get the positions of each driver 
     }
 
-    private void SetupEvents()
+    private void SetupEvents() // Todo add these events into a race report at the end 
     {
         // eg will it rain, when, will there be crashes, etc 
     }
