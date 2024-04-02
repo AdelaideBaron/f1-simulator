@@ -19,28 +19,39 @@ graph TD;
     
 ```
 
-### High level architecture
+### High Level Architecture
+
+<details>
+    <summary>Diagram</summary>
+
 ```mermaid 
 graph LR;
     application <--> user;
     application <--> database;
     application <--> openweatherAPI;
-
 ```
+</details>
+
+
 
 ### Inner Workings of the Application
+
+<details>
+    <summary>Diagram</summary>
+
 ```mermaid 
 graph TD;
- 
+
 
     user --> view;
     view --> controller;
     controller --> model;
     controller --> database;
-    
-    controller --> view;
 
+    controller --> view;
 ```
+</details>
+
 
 ## Running the program
 
