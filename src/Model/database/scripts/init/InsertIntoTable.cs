@@ -74,12 +74,14 @@ public class InsertIntoTable
                                          """;
     
     private const string InsertTyre = """
-                                               INSERT INTO tyre  -- rough data gathered from https://www.blackcircles.com
-                                                   (compound, max_laps, speed)
+                                               INSERT INTO tyre  -- rough data gathered from https://www.blackcircles.com, inaccurate speed ratio 
+                                                   (compound, max_laps, speed_ratio)
                                                VALUES
                                               ("soft", 25, 1),
-                                              ("medium", 35, 1),
-                                              ("hard", 45, 1);
+                                              ("medium", 35, 0.8),
+                                              ("hard", 45, 0.6), 
+                                              ("intermediate", 40, 0.4), -- could not gather accurate info for max laps, so taking influence from Hamilton's race to win 7th championship with ~50 laps 
+                                              ("wet", 40, 0.2); -- ^ same note
                                               """;
     
     public static string[] GetInsertIntoStatements()
