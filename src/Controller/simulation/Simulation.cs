@@ -36,4 +36,9 @@ public class Simulation // for each simulation
         // setup the teams - decide if they are going for a two stop, one stop, etc 
         // get the positions of each driver 
     }
+
+    private void SetupEvents()
+    {
+        // eg will it rain, when, will there be crashes, etc 
+    }
 }
