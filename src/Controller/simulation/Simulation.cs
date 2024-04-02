@@ -1,3 +1,4 @@
+using Controller.database;
 using Model.database.scripts;
 using Model.@enum;
 
@@ -8,6 +9,8 @@ public class Simulation // for each simulation
     public Circuit Circuit;
     public Guid RaceId { get; }
     private SimulatedCircuit _simulatedCircuit;
+    
+    DatabaseClient _databaseClient = new DatabaseClient();
     
     public Simulation(Circuit circuit)
     {
@@ -39,6 +42,8 @@ public class Simulation // for each simulation
 
     private void SetupEvents() // Todo add these events into a race report at the end 
     {
+        _databaseClient.GetCircuitLaps(Circuit);
+        // for this circuit, get the avg pitstops & laps - from db... 
         // eg will it rain, when, will there be crashes, etc 
     }
 }

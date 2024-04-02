@@ -94,6 +94,7 @@ public class InsertIntoTable
         return statements;
     }
     // The below populate random data for now until I have time to update this to be more accurate
+    // Todo - move the laps to be in the circuit_stats table 
     private static string GenerateInsertCircuitStatements()
     {
         StringBuilder insertStatements = new StringBuilder();
