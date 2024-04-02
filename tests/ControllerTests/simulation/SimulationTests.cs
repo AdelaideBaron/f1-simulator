@@ -1,24 +1,24 @@
 using Controller.simulation;
 using Model.@enum;
 
-namespace ControllerTests;
+namespace ControllerTests.simulation;
 
 public class SimulationTests
 {
     
-    private Circuit testCircuit;
+    private Circuit _testCircuit;
 
     [SetUp]
     public void SetUp()
     {
-    testCircuit = Circuit.Bahrain;
+    _testCircuit = Circuit.Bahrain;
     }
     
     [Test]
     public void SimulationAutoAssignsRaceIdAndCircuit()
     {
         Guid randomUuid = Guid.NewGuid();
-        Simulation simulation = new Simulation(testCircuit);
+        Simulation simulation = new Simulation(_testCircuit);
         Assert.That(simulation.Circuit, Is.EqualTo(Circuit.Bahrain));
         Assert.That(simulation.RaceId.GetType(), Is.EqualTo(randomUuid.GetType()));
     }

@@ -48,9 +48,9 @@ public class CreateTable
                                       CREATE TABLE IF NOT EXISTS tyre
                                       (
                                           tyre_id INT AUTO_INCREMENT,
-                                          compound ENUM("soft", "medium", "hard"),
+                                          compound ENUM("soft", "medium", "hard", "intermediate", "wet"),
                                           max_laps INT,
-                                          speed DECIMAL(2,1), -- a decimal representation speed, fastest (softs) = 1, slower will be less than
+                                          speed_ratio DECIMAL(2,1), -- a decimal representation speed, fastest (softs) = 1, slower will be less than
                                           PRIMARY KEY (tyre_id)
                                       );
                                       """;
