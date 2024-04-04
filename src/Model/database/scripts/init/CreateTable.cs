@@ -60,7 +60,7 @@ public class CreateTable
                                                    (
                                                        simulated_race_id VARCHAR(36),
                                                        driver_number INT UNIQUE, -- driver entry to be updated, only one entry per driver
-                                                       position TINYINT UNSIGNED CHECK (position >= 0 AND position <= 20),
+                                                       position TINYINT UNSIGNED CHECK (position >= 0 AND position <= 20) DEFAULT 0,
                                                        status ENUM("is_driving", "race_ban", "dnf", "no_start"),
                                                        lap_no INT,
                                                        laptime DECIMAL(6, 5), -- m:SSmSms - e.g 1:19.915 = 1.19915,
