@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Model.database.scripts;
 using Model.dto;
 using Model.@enum;
@@ -35,6 +36,22 @@ public class InsertDuringRaceTests
                           """.Trim();
         Console.WriteLine(actual);
         Assert.That(actual.Trim(), Is.EqualTo(expected));
+    }
+    
+    [Test]
+    public void SimulatedRaceInitStatementFormatsUuid()
+    {
+        string actual = InsertDuringRace.GetSimulatedRaceLiveInitialiseStatement("someString").Replace("\r\n", "\n").Trim();
+        string expected = $"""
+                           INSERT INTO simulated_race_live
+                           (simulated_race_id, driver_number)
+                           SELECT driver_number, "someString" FROM driver;
+                           """.Replace("\r\n", "\n").Trim();
+        
+        expected = Regex.Replace(expected, @"\s+", " ").Trim(); 
+        actual = Regex.Replace(actual, @"\s+", " ").Trim(); 
+        
+        Assert.That(actual, Is.EqualTo(expected));
     }
     
 }

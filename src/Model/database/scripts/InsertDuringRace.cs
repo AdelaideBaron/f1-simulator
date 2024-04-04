@@ -5,6 +5,15 @@ namespace Model.database.scripts;
 
 public class InsertDuringRace
 {
+    public static string GetSimulatedRaceLiveInitialiseStatement(string uuid)
+    {
+        return $"""
+                 INSERT INTO simulated_race_live
+                 (simulated_race_id, driver_number)
+                 SELECT driver_number, "{uuid}" FROM driver;
+                """;
+    }
+    
     public static string GetRaceConditionsStatement(CircuitConditions circuitConditions) 
     {
         string circuitName = CircuitExtensions.GetCircuitName(circuitConditions.Circuit);
