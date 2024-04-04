@@ -6,10 +6,10 @@ namespace Controller.simulation.simulatedAttributes;
 
 public class Events // a class to 'predict' the race events
 {
-    public static RaceEvents GetSimulatedRaceEvents(SimulatedCircuit simulatedCircuit, int avgPitstops,
+    public static RaceEvents GetSimulatedRaceEvents(CircuitConditions simulatedCircuitConditions, int avgPitstops,
             int laps) // get avg pitstops from the db 
     {
-        bool isRaining = simulatedCircuit.CurrentConditions.IsRaining;
+        bool isRaining = simulatedCircuitConditions.IsRaining;
         // get circuit stats 
         RaceEvents raceEvents = new RaceEvents();
         // set when rain 
@@ -19,7 +19,7 @@ public class Events // a class to 'predict' the race events
             raceEvents.RainStops = RandomGenerator.GetRandomInt(raceEvents.RainStarts, laps);
         }
         // set race strategy 
-        raceEvents.RaceStrategy = (simulatedCircuit.CurrentConditions.IsRaining) ? GetRaceStrategy(raceEvents, avgPitstops) : avgPitstops;
+        raceEvents.RaceStrategy = (simulatedCircuitConditions.IsRaining) ? GetRaceStrategy(raceEvents, avgPitstops) : avgPitstops;
         // set the incidents
         raceEvents.RaceIncidents = GetIncidents(isRaining, laps);
         return raceEvents;

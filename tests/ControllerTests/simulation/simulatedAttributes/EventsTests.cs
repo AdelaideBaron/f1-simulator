@@ -6,7 +6,7 @@ namespace ControllerTests.simulation.simulatedAttributes;
 
 public class EventsTests
 {
-    private SimulatedCircuit _simulatedCircuit;
+    private CircuitConditions _simulatedCircuitConditions;
     private RaceEvents _actualEvent;
     private int _testAvgPitstops;
     private int _testLaps;
@@ -15,10 +15,10 @@ public class EventsTests
     [SetUp]
     public void SetUp()
     {
-        _simulatedCircuit = new SimulatedCircuit(Circuit.Monaco);
+        _simulatedCircuitConditions = new SimulatedCircuit(Circuit.Monaco).CurrentConditions;
         _testAvgPitstops = 2;
         _testLaps = 70;
-        _actualEvent = Events.GetSimulatedRaceEvents(_simulatedCircuit, _testAvgPitstops, _testLaps);
+        _actualEvent = Events.GetSimulatedRaceEvents(_simulatedCircuitConditions, _testAvgPitstops, _testLaps);
     }
 
     [Test]
@@ -37,7 +37,7 @@ public class EventsTests
     [Test]
     public void SimulatedRaceRainLapsIsZeroIfCircuitNotRaining()
     {
-        if (!_simulatedCircuit.CurrentConditions.IsRaining)
+        if (!_simulatedCircuitConditions.IsRaining)
         {
             Assert.That(_actualEvent.RainStarts == 0);
             Assert.That(_actualEvent.RainStops == 0);
@@ -47,7 +47,7 @@ public class EventsTests
     [Test]
     public void SimulatedRaceStrategyIncreasesIfRain()
     {
-        if (_simulatedCircuit.CurrentConditions.IsRaining)
+        if (_simulatedCircuitConditions.IsRaining)
         {
             Assert.That(_actualEvent.RaceStrategy > _testAvgPitstops);
         }
@@ -56,7 +56,7 @@ public class EventsTests
     [Test]
     public void SimulatedRaceStrategyRemainsSameIfNoRain()
     {
-        if (!_simulatedCircuit.CurrentConditions.IsRaining)
+        if (!_simulatedCircuitConditions.IsRaining)
         {
             Assert.That(_actualEvent.RaceStrategy == _testAvgPitstops);
         }
