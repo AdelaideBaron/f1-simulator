@@ -10,7 +10,7 @@ public class InsertDuringRace
         return $"""
                  INSERT INTO simulated_race_live
                  (simulated_race_id, driver_number)
-                 SELECT driver_number, "{uuid}" FROM driver;
+                 SELECT "{uuid}", driver_number FROM driver;
                 """;
     }
     

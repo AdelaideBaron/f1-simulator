@@ -17,6 +17,11 @@ public class DatabaseClient
         RunStatements(CreateTrigger.GetCreateTriggerStatements());
     }
 
+    public void RunStatement(string statement)
+    {
+        RunSqlStatement(statement);
+    }
+
     private void RunStatements(string[] statements)
     {
         foreach (string statement in statements)

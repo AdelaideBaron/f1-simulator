@@ -1,3 +1,4 @@
+using Controller.database;
 using Model.database.scripts;
 using Model.@enum;
 
@@ -22,6 +23,7 @@ public class Simulation // for each simulation
     
     private void SetupCircuitAndDrivers()
     {
+        SimulatedDbClient.InitSimRaceLiveTable(RaceId);
         // setup the tables - simulated race results - first 
         // setup drivers - todo in next branch
         // add this to the DB 
@@ -40,5 +42,10 @@ public class Simulation // for each simulation
     private void SetupEvents() // Todo add these events into a race report at the end 
     {
         // eg will it rain, when, will there be crashes, etc 
+    }
+
+    private void TeardownDB()
+    {
+        //simulation live 
     }
 }

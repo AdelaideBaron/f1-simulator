@@ -1,4 +1,5 @@
 using Controller.http;
+using Controller.simulation.simulatedAttributes;
 using Model.dto;
 using Model.@enum;
 
@@ -8,6 +9,8 @@ public class SimulatedCircuit
 {
     private Circuit circuit;
     public CircuitConditions CurrentConditions { get; set; }
+
+    public RaceEvents RaceEvents { get; set; }
 
     public SimulatedCircuit(Circuit circuitToSimulate)
     {
@@ -19,5 +22,6 @@ public class SimulatedCircuit
     {
         WeatherClient client = new WeatherClient();
         CurrentConditions = client.GetCircuitConditions(circuit);
+        RaceEvents = Events.GetSimulatedRaceEvents(CurrentConditions, 2, 90); // Todo placeholders! 
     }
 }
