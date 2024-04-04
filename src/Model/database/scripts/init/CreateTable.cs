@@ -60,14 +60,13 @@ public class CreateTable
                                                    (
                                                        simulated_race_id VARCHAR(36),
                                                        driver_number INT UNIQUE, -- driver entry to be updated, only one entry per driver
-                                                       position TINYINT UNSIGNED NOT NULL CHECK (position >= 0 AND position <= 20),
+                                                       position TINYINT UNSIGNED CHECK (position >= 0 AND position <= 20),
                                                        status ENUM("is_driving", "race_ban", "dnf", "no_start"),
                                                        lap_no INT,
                                                        laptime DECIMAL(6, 5), -- m:SSmSms - e.g 1:19.915 = 1.19915,
                                                        tyre_id INT,
                                                        tyre_age INT, -- in laps
                                                        pit_stops INT,
-                                                        PRIMARY KEY (simulated_race_id),
                                                        FOREIGN KEY(driver_number) REFERENCES driver(driver_number),
                                                        FOREIGN KEY(tyre_id) REFERENCES tyre(tyre_id)
                                                    );
@@ -84,8 +83,8 @@ public class CreateTable
                                                         laptime DECIMAL(6, 5), -- m:SSmSms - e.g 1:19.915 = 1.19915,
                                                         tyre_id INT,
                                                         tyre_age INT, -- in laps
-                                                        pit_stops INT,
-                                                        FOREIGN KEY(simulated_race_id) REFERENCES simulated_race_live(simulated_race_id)
+                                                        pit_stops INT, 
+                                                        updated_ad DATETIME DEFAULT NOW()
                                                     );
                                                     """;
 
