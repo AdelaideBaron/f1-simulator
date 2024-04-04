@@ -1,22 +1,25 @@
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
 using Model.database.scripts;
+using Model.database.scripts.init;
 
 namespace Model.database;
 
 public class DatabaseClient
 {
     // Todo this code needs optimising, as repeating the create table everytime is time consuming - e.g. opening and closing the connection. 
-    readonly string connectionString = "server=localhost;user=root;password=password;database=f1_simulator";
+    readonly string _connectionString = "server=localhost;user=root;password=password;database=f1_simulator";
 
     public void InitialiseDatabase()
     {
-        foreach (string statement in CreateTable.GetCreateTableStatements())
-        {
-            RunSqlStatement(statement);
-        }
+        RunStatements(CreateTable.GetCreateTableStatements());
+        RunStatements(InsertIntoTable.GetInsertIntoStatements());
+        RunStatements(CreateTrigger.GetCreateTriggerStatements());
+    }
 
-        foreach (string statement in InsertIntoTable.GetInsertIntoStatements())
+    private void RunStatements(string[] statements)
+    {
+        foreach (string statement in statements)
         {
             RunSqlStatement(statement);
         }
@@ -24,7 +27,7 @@ public class DatabaseClient
 
     private void RunSqlStatement(string statement)
     {
-        using (MySqlConnection connection = new MySqlConnection(connectionString))
+        using (MySqlConnection connection = new MySqlConnection(_connectionString))
         {
             try
             {
@@ -52,15 +55,24 @@ public class DatabaseClient
 
             if (firstWord == "CREATE")
             {
-                string pattern = @"CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+(\w+)";
-                string tableName = ExtractTableName(input, pattern);
-                Console.WriteLine($"CREATE {tableName} created SUCCESSFUL");
+                if (words.Length >= 2 && words[1].ToUpper() == "TABLE")
+                {
+                    string pattern = @"CREATE\s+TABLE\s+IF\s+NOT\s+EXISTS\s+(\w+)";
+                    string tableName = ExtractTableName(input, pattern);
+                    Console.WriteLine($"CREATE TABLE {tableName} created SUCCESSFULLY");
+                }
+                else if (words.Length >= 2 && words[1].ToUpper() == "TRIGGER")
+                {
+                    string pattern = @"CREATE\s+TRIGGER\s+(\w+)";
+                    string triggerName = ExtractTableName(input, pattern);
+                    Console.WriteLine($"CREATE TRIGGER {triggerName} created SUCCESSFULLY");
+                }
             }
             else if (firstWord == "INSERT")
             {
                 string pattern = @"INSERT\s+INTO\s+(\w+)";
                 string tableName = ExtractTableName(input, pattern);
-                Console.WriteLine($"INSERT INTO {tableName} SUCCESSFUL");
+                Console.WriteLine($"INSERT INTO {tableName} SUCCESSFULLY");
             }
         }
         else
