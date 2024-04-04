@@ -22,6 +22,6 @@ public class SimulatedCircuit
     {
         WeatherClient client = new WeatherClient();
         CurrentConditions = client.GetCircuitConditions(circuit);
-        RaceEvents = Events.GetSimulatedRaceEvents(CurrentConditions, 2, 90); // placeholders! 
+        RaceEvents = Events.GetSimulatedRaceEvents(CurrentConditions, 2, 90); // Todo placeholders! 
     }
 }
